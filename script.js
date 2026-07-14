@@ -72,6 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
     sectionTargets.forEach((section) => sectionObserver.observe(section));
   }
 
+  const factsToggle = document.getElementById('facts-toggle');
+  const factsList = document.getElementById('facts-list');
+  if (factsToggle && factsList) {
+    const factsToggleText = factsToggle.querySelector('.facts-toggle-text');
+    factsToggle.addEventListener('click', () => {
+      const open = !factsList.classList.contains('is-open');
+      factsList.classList.toggle('is-open', open);
+      factsToggle.setAttribute('aria-expanded', String(open));
+      if (factsToggleText) {
+        factsToggleText.textContent = open ? 'Zahlen & Fakten ausblenden' : 'Zahlen & Fakten anzeigen';
+      }
+    });
+  }
+
   const footerYear = document.getElementById('footer-year');
   if (footerYear) {
     footerYear.textContent = String(new Date().getFullYear());
