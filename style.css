@@ -672,7 +672,7 @@ ul {
   }
 
   .hero-img {
-    object-position: center 75%;
+    object-position: center calc(50% + 20px);
     -webkit-mask-image: none;
     mask-image: none;
   }
