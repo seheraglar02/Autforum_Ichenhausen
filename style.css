@@ -672,7 +672,7 @@ ul {
   }
 
   .hero-img {
-    object-position: center center;
+    object-position: center 75%;
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -680,10 +680,12 @@ ul {
   .hero-overlay {
     background:
       linear-gradient(180deg,
-        rgba(11, 11, 11, 0.92) 0%,
-        rgba(11, 11, 11, 0.72) 16%,
-        rgba(11, 11, 11, 0.3) 26%,
-        rgba(11, 11, 11, 0) 36%,
+        rgba(11, 11, 11, 0.97) 0%,
+        rgba(11, 11, 11, 0.88) 10%,
+        rgba(11, 11, 11, 0.68) 20%,
+        rgba(11, 11, 11, 0.4) 30%,
+        rgba(11, 11, 11, 0.16) 40%,
+        rgba(11, 11, 11, 0) 50%,
         rgba(11, 11, 11, 0) 62%,
         rgba(11, 11, 11, 0.35) 74%,
         rgba(11, 11, 11, 0.78) 87%,
