@@ -635,7 +635,7 @@ ul {
   }
 
   .hero-img {
-    object-position: center 30%;
+    object-position: center 48%;
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -669,10 +669,11 @@ ul {
 
   .hero-subtitle {
     max-width: 100%;
+    font-size: 16px;
   }
 
   .hero-title {
-    font-size: 38px;
+    font-size: 42px;
   }
 }
 
@@ -691,7 +692,7 @@ ul {
   }
 
   .hero-title {
-    font-size: 30px;
+    font-size: 33px;
   }
 
   .hero-subtitle {
