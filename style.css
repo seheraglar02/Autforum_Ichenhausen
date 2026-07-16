@@ -635,7 +635,7 @@ ul {
   }
 
   .hero-img {
-    object-position: center calc(50% + 20px);
+    object-position: center 30%;
     -webkit-mask-image: none;
     mask-image: none;
   }
@@ -643,16 +643,13 @@ ul {
   .hero-overlay {
     background:
       linear-gradient(180deg,
-        rgba(11, 11, 11, 0.97) 0%,
-        rgba(11, 11, 11, 0.88) 10%,
-        rgba(11, 11, 11, 0.68) 20%,
-        rgba(11, 11, 11, 0.4) 30%,
-        rgba(11, 11, 11, 0.16) 40%,
-        rgba(11, 11, 11, 0) 50%,
-        rgba(11, 11, 11, 0) 62%,
-        rgba(11, 11, 11, 0.35) 74%,
-        rgba(11, 11, 11, 0.78) 87%,
-        rgba(11, 11, 11, 1) 100%);
+        rgba(8, 8, 8, 0.5) 0%,
+        rgba(8, 8, 8, 0.32) 8%,
+        rgba(8, 8, 8, 0) 20%,
+        rgba(8, 8, 8, 0) 38%,
+        rgba(8, 8, 8, 0.6) 55%,
+        rgba(8, 8, 8, 0.9) 80%,
+        rgba(8, 8, 8, 1) 100%);
   }
 
   .hero-cta-row .btn-secondary {
@@ -662,25 +659,16 @@ ul {
   }
 
   .hero-content {
-    justify-content: flex-start;
     padding-top: calc(var(--header-height) + 16px);
-    padding-bottom: 16px;
-    text-align: center;
+    padding-bottom: 64px;
   }
 
   .hero-copy {
-    display: contents;
+    max-width: 100%;
   }
 
   .hero-subtitle {
     max-width: 100%;
-    margin-top: auto;
-  }
-
-  .hero-cta-row {
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .hero-title {
@@ -699,7 +687,7 @@ ul {
   }
 
   .hero-content {
-    padding-bottom: 14px;
+    padding-bottom: 48px;
   }
 
   .hero-title {
