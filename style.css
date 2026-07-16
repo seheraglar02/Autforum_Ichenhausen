@@ -718,6 +718,20 @@ ul {
     max-width: none;
     padding-left: 6vw;
   }
+
+  .hero-copy {
+    max-width: 760px;
+  }
+
+  .hero-subtitle {
+    max-width: 560px;
+  }
+
+  .header-inner.container {
+    max-width: none;
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
 }
 
 /* ---------- About / Über uns ---------- */
