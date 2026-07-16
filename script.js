@@ -72,22 +72,45 @@ document.addEventListener('DOMContentLoaded', () => {
     sectionTargets.forEach((section) => sectionObserver.observe(section));
   }
 
-  const factsToggle = document.getElementById('facts-toggle');
-  const factsList = document.getElementById('facts-list');
-  if (factsToggle && factsList) {
-    const factsToggleText = factsToggle.querySelector('.facts-toggle-text');
-    factsToggle.addEventListener('click', () => {
-      const open = !factsList.classList.contains('is-open');
-      factsList.classList.toggle('is-open', open);
-      factsToggle.setAttribute('aria-expanded', String(open));
-      if (factsToggleText) {
-        factsToggleText.textContent = open ? 'Zahlen & Fakten ausblenden' : 'Zahlen & Fakten anzeigen';
-      }
-    });
-  }
-
   const footerYear = document.getElementById('footer-year');
   if (footerYear) {
     footerYear.textContent = String(new Date().getFullYear());
   }
+
+  const choices = Array.from(document.querySelectorAll('.call-choice')).map((wrapper) => ({
+    wrapper,
+    trigger: wrapper.querySelector('.call-choice-trigger'),
+    menu: wrapper.querySelector('.call-choice-menu'),
+  })).filter(({ trigger, menu }) => trigger && menu);
+
+  const setChoiceOpen = (choice, open) => {
+    choice.menu.hidden = !open;
+    choice.trigger.setAttribute('aria-expanded', String(open));
+  };
+
+  choices.forEach((choice) => {
+    choice.trigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const willOpen = choice.menu.hidden;
+      choices.forEach((other) => setChoiceOpen(other, other === choice && willOpen));
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    choices.forEach((choice) => {
+      if (!choice.menu.hidden && !choice.menu.contains(event.target) && event.target !== choice.trigger) {
+        setChoiceOpen(choice, false);
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    choices.forEach((choice) => {
+      if (!choice.menu.hidden) {
+        setChoiceOpen(choice, false);
+        choice.trigger.focus();
+      }
+    });
+  });
 });
