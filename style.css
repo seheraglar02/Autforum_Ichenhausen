@@ -363,7 +363,7 @@ ul {
 
 .hero {
   position: relative;
-  height: 100dvh;
+  height: 100svh;
   min-height: 680px;
   display: flex;
   align-items: stretch;
@@ -625,7 +625,7 @@ ul {
 
   .hero {
     min-height: 0;
-    height: 100dvh;
+    height: 100svh;
     aspect-ratio: auto;
     display: flex;
   }
