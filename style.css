@@ -709,6 +709,17 @@ ul {
   }
 }
 
+@media (min-width: 1600px) {
+  :root {
+    --fs-h1: clamp(38px, 4.4vw, 80px);
+  }
+
+  .hero-content.container {
+    max-width: none;
+    padding-left: 6vw;
+  }
+}
+
 /* ---------- About / Über uns ---------- */
 
 .about {
