@@ -114,4 +114,79 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Scroll-Reveal-Animationen
+  const revealEls = Array.from(document.querySelectorAll('.reveal, .reveal-scale'));
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px',
+      });
+      revealEls.forEach((el) => revealObserver.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('is-visible'));
+    }
+  }
+
+  // Zähl-Animation für die Kennzahlen (Facts)
+  const factsList = document.querySelector('.facts-list');
+  const factNumbers = Array.from(document.querySelectorAll('.fact-number'));
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const parseFactValue = (text) => {
+    const match = text.trim().match(/^(\D*)([\d.,]+)(\D*)$/);
+    if (!match) return null;
+    const [, prefix, numeric, suffix] = match;
+    const separator = numeric.includes(',') ? ',' : (numeric.includes('.') ? '.' : '');
+    const decimals = separator ? numeric.split(separator)[1].length : 0;
+    const value = parseFloat(numeric.replace(',', '.'));
+    return { prefix, suffix, separator, decimals, value };
+  };
+
+  const animateCount = (el, { prefix, suffix, separator, decimals, value }) => {
+    const duration = 1400;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = value * eased;
+      const formatted = decimals
+        ? current.toFixed(decimals).replace('.', separator)
+        : Math.round(current).toString();
+      el.textContent = `${prefix}${formatted}${suffix}`;
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+    requestAnimationFrame(step);
+  };
+
+  if (factsList && factNumbers.length && !prefersReducedMotion) {
+    const parsedFacts = factNumbers
+      .map((el) => ({ el, data: parseFactValue(el.textContent) }))
+      .filter(({ data }) => data);
+
+    if (parsedFacts.length) {
+      if ('IntersectionObserver' in window) {
+        const factsObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              parsedFacts.forEach(({ el, data }) => animateCount(el, data));
+              obs.disconnect();
+            }
+          });
+        }, { threshold: 0.4 });
+        factsObserver.observe(factsList);
+      }
+    }
+  }
+
 });
