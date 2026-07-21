@@ -25,33 +25,31 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  const lightSections = document.querySelectorAll('.vehicles, .testimonials, .contact');
-  if (lightSections.length && 'IntersectionObserver' in window) {
-    const activeLight = new Set();
-    let lightObserver;
+  const lightSections = Array.from(document.querySelectorAll('.vehicles, .testimonials, .contact'));
+  if (lightSections.length) {
+    let lightRanges = [];
 
-    const setupLightObserver = () => {
-      if (lightObserver) lightObserver.disconnect();
-      activeLight.clear();
-      const headerHeight = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 10) || 72;
-      lightObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            activeLight.add(entry.target);
-          } else {
-            activeLight.delete(entry.target);
-          }
-        });
-        header.classList.toggle('is-light', activeLight.size > 0);
-      }, {
-        rootMargin: `0px 0px -${window.innerHeight - headerHeight}px 0px`,
-        threshold: 0,
+    const measureLightRanges = () => {
+      lightRanges = lightSections.map((section) => {
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        return { top, bottom: top + section.offsetHeight };
       });
-      lightSections.forEach((section) => lightObserver.observe(section));
     };
 
-    setupLightObserver();
-    window.addEventListener('resize', setupLightObserver, { passive: true });
+    const updateLightState = () => {
+      const headerHeight = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'), 10) || 72;
+      const probeY = window.scrollY + headerHeight;
+      const isLight = lightRanges.some(({ top, bottom }) => probeY >= top && probeY < bottom);
+      header.classList.toggle('is-light', isLight);
+    };
+
+    measureLightRanges();
+    updateLightState();
+    window.addEventListener('scroll', updateLightState, { passive: true });
+    window.addEventListener('resize', () => {
+      measureLightRanges();
+      updateLightState();
+    }, { passive: true });
   }
 
   const navLinks = Array.from(mainNav.querySelectorAll('a[href^="#"]'));
