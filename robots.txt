@@ -1,24 +1,35 @@
 User-agent: *
 Allow: /
 
-# KI-Crawler explizit erlauben (Sichtbarkeit in ChatGPT, Perplexity, Google AI Overviews)
+# ChatGPT
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
+# Claude
 User-agent: ClaudeBot
 Allow: /
 
-User-agent: anthropic-ai
+User-agent: Claude-User
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
+# Perplexity
 User-agent: PerplexityBot
+Allow: /
+
+# Google
+User-agent: Googlebot
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-# TODO: Platzhalter-Domain durch die echte Domain ersetzen, sobald sie feststeht
-Sitemap: https://IHRE-DOMAIN.de/sitemap.xml
+Sitemap: https://autoforumichenhausen.de/sitemap.xml

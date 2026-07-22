@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: Platzhalter-Domain "https://IHRE-DOMAIN.de" durch die echte Domain ersetzen, sobald sie feststeht -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
-    <loc>https://IHRE-DOMAIN.de/</loc>
-    <lastmod>2026-07-21</lastmod>
+    <loc>https://autoforumichenhausen.de/</loc>
+    <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
 </urlset>
